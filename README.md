@@ -1,5 +1,5 @@
 # gomts
 
-A [mytimestation] client for Go.
+A [MyTimeStation] client for Go.
 
-[mytimestation]: https://mytimestation.com
+[MyTimeStation]: https://mytimestation.com
