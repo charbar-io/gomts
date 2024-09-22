@@ -58,6 +58,6 @@ MTS_AUTH_TOKEN="XXXXXXXXXXXXXX" \
 
 [MIT License]
 
-[MIT License]: ./README.md
+[MIT License]: ./LICENSE
 [MyTimeStation]: https://mytimestation.com
 [godoc]: https://go.charbar.io/gomts
