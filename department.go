@@ -33,12 +33,17 @@ type DepartmentCreateRequest struct {
 // form implements formRequest.
 func (DepartmentCreateRequest) form() {}
 
-type DepartmentResponse struct {
-	Department Department `json:"department"`
+// DepartmentListResponse is the response used for the List API method.
+type DepartmentListResponse struct {
+	// Departments is the list of departments
+	Departments []Department `json:"departments"`
 }
 
-type DepartmentListResponse struct {
-	Departments []Department `json:"departments"`
+// DepartmentResponse is the response used for the Create, Get, Update and
+// Delete API methods.
+type DepartmentResponse struct {
+	// Department is the department of subject.
+	Department Department `json:"department"`
 }
 
 // depertmentClient implements DepartmentClient.

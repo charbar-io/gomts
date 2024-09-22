@@ -1,4 +1,4 @@
-package gomts
+package gomts_test
 
 import (
 	"context"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"go.charbar.io/gomts"
 )
 
 var numRunes = []rune("1234567890")
@@ -19,17 +20,16 @@ func randomPin() string {
 }
 
 func TestEmployeesCreate(t *testing.T) {
-	integrationTest(t)
+	client, _ := integrationTest(t)
 
 	ctx := context.Background()
-	client, _ := testClient()
 
-	dept, err := client.Departments().Create(ctx, &DepartmentCreateRequest{
+	dept, err := client.Departments().Create(ctx, &gomts.DepartmentCreateRequest{
 		Name: testResourceName("something"),
 	})
 	assert.NoError(t, err)
 
-	createRequest := &EmployeeCreateRequest{
+	createRequest := &gomts.EmployeeCreateRequest{
 		Name:  testResourceName("bob ross"),
 		PIN:   randomPin(),
 		Title: "Senior Artist",

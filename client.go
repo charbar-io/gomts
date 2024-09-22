@@ -23,9 +23,12 @@ func NewClient(conf *Config) Client {
 
 // Client represents client to the MyTimeStation API.
 type Client interface {
-	// Employees returns the EmployeeClient.
+	// Employees returns the EmployeeClient, which handles operations related
+	// to employees within MyTimeStation.
 	Employees() EmployeeClient
 
+	// Departments returns the DepartmentClient, which handles operations
+	// related to departments within MyTimeStation.
 	Departments() DepartmentClient
 }
 
@@ -59,7 +62,7 @@ type Config struct {
 	Transport http.RoundTripper
 
 	// LogHandler can be specified to cutomize the slog.Logger.
-	LogHandler *slog.Handler
+	LogHandler slog.Handler
 }
 
 // GetAuthToken gets the configured auth token or the MTS_AUTH_TOKEN
@@ -127,7 +130,7 @@ func (c *Config) GetBaseURL() string {
 func (c *Config) GetLogger() *slog.Logger {
 	if c.LogHandler != nil {
 		// use user-specified log handler
-		return slog.New(*c.LogHandler)
+		return slog.New(c.LogHandler)
 	}
 
 	level := slog.LevelInfo.Level()
@@ -181,7 +184,6 @@ func newClient(conf *Config) *client {
 	return c
 }
 
-// Employees returns the EmployeeClient.
 func (c *client) Employees() EmployeeClient {
 	return c.employees
 }
@@ -190,6 +192,8 @@ func (c *client) Departments() DepartmentClient {
 	return c.departments
 }
 
+// formRequest is an interface that request structs can implement to use form
+// encoding instead of JSON.
 type formRequest interface {
 	form()
 }
